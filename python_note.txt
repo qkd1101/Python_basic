@@ -96,10 +96,88 @@ mix_list = ["강길동", 30 , True]
 subway.extend(mix_list) : subway 리스트에 mix_list 합침
 
 ----사전----
-cabinet = {3:"A", 100:"A2"}
-print(cabinet[3])
-print(cabinet.get(3))
+cabinet = {3:"A", 100:"A2", "A-3" : "A3"}
+print(cabinet[3]) : 특정 인덱스 순서쌍
+print(cabinet.get(3)) : 벨류
 
 print(cabinet[5]) : 에러 발생 + 종료
 print(cabinet.get(5)) : "none" 반환, 종료 X
 print(cabinet.get(5,"Stirng A")) : "String A" 반환, 종료 X
+print(3 in cabinet) : boolean, 있는지 없는지
+
+cabinet["A-3"] = "3" : 변경
+cabinet["A-4"] = "A4" : 추가
+
+del cabinet["A-4"] : 삭제
+
+print(cabinet.keys()) : 키 들만 출력
+print(cabinet.values()) : 벨류 들만 출력
+print(cabinet.items()) : 키, 벨류 쌍들 출력
+
+cabinet.clear() : 삭제
+
+----튜플----
+#속도가 빠르나 변경 불가.
+menu = ("돈까스", "생선구이")
+
+(name, age, hobby) = ("강길동", 19, "코딩") #한꺼번에 선언이 가능함.
+
+----집합----
+#중복 X, 순서 보장 X
+my_set = {1,2,3,3,3}
+print(my_set) #1,2,3
+
+java = {"A","B","C"}
+python = set(["A","D"])
+
+print(java.union(python)) #합집합
+print(java.difference(python)) #차집합
+print(java.intersection(python)) #교집합
+
+python.add("E") : 추가
+java.remove("A") : 삭제
+ 
+----자료구조의 변경----
+menu={"커피","우유"}
+menu = list(menu) #list type으로 casting
+menu = tuple(menu)
+menu = set(menu) #set type으로 casting
+
+----if----
+if a == 1:
+elif a == 2:
+else :
+
+----반복문----
+for i in range(5) :  #range(n): #0~n
+    print("{0}" ,format(i))
+
+customer = {"A", "B", "C" }
+
+for cus in customer:
+    print("{0}" .format(cus)) #역순 출력됨.
+
+students = range(0,100)
+students = [i+100 for i in students]
+
+students = ["AV", "BC", "HA"]
+students = [lent(i) for i in studnets]
+
+customer = "A"
+index = 5;
+
+while index >= 1:
+    print("{0}" index)
+    
+----입력----
+input("input file name: ")
+
+temp = int(input("input your age"))
+
+a, b = input('문자열 두 개를 입력하세요: ').split()    # 입력받은 값을 공백을 기준으로 분리
+a, b = map(int, input('숫자 두 개를 입력하세요: ').split())
+a, b = map(int, input('숫자 두 개를 입력하세요: ').split(',')) # 입력받은 값을 콤마를 기준으로 분리
+ 
+----조건----
+a == 1 and b == 7
+

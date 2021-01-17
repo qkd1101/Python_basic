@@ -78,6 +78,9 @@ print("converse 70 \rchuck") #커서 앞으로 이동 출력 값 : chuck
 ----리스트----
 subway = [10,20,30]
 
+#2중리스트
+a = [[0 for col in range(14)] for row in range(14)]
+
 subway.index() : find 위치
 subway.append() : 마지막 인덱스 뒤에 요소 추가
 subway.insert(i,a) : a 를 i 인덱스에 요소 추가
@@ -89,6 +92,8 @@ subway.reverse() : 내림 차순 정렬
 
 subway.clear() : 내용 모두 삭제
 
+subway[-1] : 마지막 요소
+
 #다양한 자료형 사용 가능
 mix_list = ["강길동", 30 , True]
 
@@ -98,6 +103,7 @@ subway.extend(mix_list) : subway 리스트에 mix_list 합침
 #한줄로 되어있는 문자들 리스트의 정수형으로 받기
 # ex) 1 2 3 4 5 6 7 8 9 10 11
 li = list(map(int,input().split()))
+
 ----사전----
 cabinet = {3:"A", 100:"A2", "A-3" : "A3"}
 print(cabinet[3]) : 특정 인덱스 순서쌍

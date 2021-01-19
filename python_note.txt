@@ -79,9 +79,6 @@ print("converse 70 \rchuck") #커서 앞으로 이동 출력 값 : chuck
 ----리스트----
 subway = [10,20,30]
 
-#2중리스트
-a = [[0 for col in range(14)] for row in range(14)]
-
 subway.index() : find 위치
 subway.append() : 마지막 인덱스 뒤에 요소 추가
 subway.insert(i,a) : a 를 i 인덱스에 요소 추가
@@ -100,6 +97,9 @@ mix_list = ["강길동", 30 , True]
 
 #리스트 합치기
 subway.extend(mix_list) : subway 리스트에 mix_list 합침
+
+#2중리스트
+a = [[0 for col in range(14)] for row in range(14)]
 
 #한줄로 되어있는 문자들 리스트의 정수형으로 받기
 # ex) 1 2 3 4 5 6 7 8 9 10 11
@@ -176,6 +176,9 @@ students = [lent(i) for i in studnets]
 customer = "A"
 index = 5;
 
+for house in house :
+    house.show_detail()
+
 while index >= 1:
     print("{0}" index)
     
@@ -199,6 +202,8 @@ def add(a,b) :
     return a+b
 def sub(a,b) :
     return a-b,b #튜플 형식으로 반환
+
+x,y = sub(a,b)
 
 ----기본 인자----
 print("1234556" \
@@ -352,3 +357,164 @@ for i in range(1,51) :
         report_file.write("부서 : 연구&개발 1팀\n")
         report_file.write("이름 : 정주영\n")
         report_file.write("업무 내용 : 개발\n")
+
+----클래스----
+class Unit :
+    def __init__(self,name,hp,damage) : #Python의 생성자
+        self.name = name
+        self.hp = hp
+        self.damage = damage
+
+#클래스의 타입으로 선언되었을 때 객체라고 부르고,
+#그 객체가 메모리에 할당되어 실제 사용될 때 인스턴스라고 부른다.
+marine = Unit("M1",40,5)
+
+----멤버변수----
+class Unit :
+    def __init__(self,name,hp,damage) : #Python의 생성자
+        self.name = name #멤버변수
+        self.hp = hp
+        self.damage = damage
+
+wraith = Unit("레이스1",80,5)
+print("이름 : {0}, 공격력 : {1}".format(wraith.name,wraith))
+
+#추가로 외부의 변수를 만들 수 있음, 확장한 변수, 확장된 객체에만 적용 가능함.(wraith2만 )
+wraith2.clocking = True
+
+----메소드----
+class Unit :
+    def __init__(self,name,hp,damage) : #Python의 생성자
+        self.name = name #멤버변수
+        self.hp = hp
+        self.damage = damage
+
+Class AttackUnit :
+    def __init__(self,name,hp,damage) : #Python의 생성자
+            self.name = name #멤버변수
+            self.hp = hp
+            self.damage = damage
+
+    def attack(self,location) : 
+        print("{0} : {1} "\
+            .format(self.name, location))
+
+    def damaged(self,damage) :
+        print("{0} : {1}"\
+            .format(self.name,damage))
+        self.hp -= damage
+        if(self.hp <= 0)
+            print("{0} : 파괴되었습니다.")
+
+----상속----
+class Unit : #부모 클래스
+    def __init__(self,name,hp) : #Python의 생성자
+        self.name = name #멤버변수
+        self.hp = hp
+        self.damage = damage
+ 
+Class AttackUnit(Unit): #자식 클래스
+    def __init__(self,name,hp,damage) : #Python의 생성자
+            Unit.__init(self,name,hp) #상속받은 클래스
+            self.damage = damage
+
+----다중상속----
+class Unit :
+    def __init__(self,name,hp) : #Python의 생성자
+        self.name = name #멤버변수
+        self.hp = hp
+ 
+class AttackUnit(Unit):
+    def __init__(self,name,hp,damage) : #Python의 생성자
+            Unit.__init__(self,name,hp) #상속받은 클래스
+            self.damage = damage
+
+class Flyable :
+    def __init__(self,flying_speed) :
+        self.flying_speed = flying_speed
+
+    def fly(self,name,location) :
+        print("{0} : {1}".format(name,location)) #self 안 썻음
+
+class FlyableAttackUnit(AttackUnit, Flyable):
+    def __init__(self,name,hp,damage,flying_speed) :
+        AttackUnit.__init__(self,name,hp,damage)
+        Flyable.__init__(self,flying_speed)
+
+valkyrie = FlyableAttackUnit("valkyrie",200,6,5)
+valkyrie.fly(Valkyrie.name,10)
+
+----메소드 오버라이딩----
+#메소드 재정의
+class Unit :
+    def __init__(self,name,hp,speed) : #Python의 생성자
+        self.name = name #멤버변수
+        self.hp = hp
+        self.speed = speed
+
+    def move(self, location) : 
+        print("{0} : {1}으로 지상 유닛 이동".format(self.name, location, self.speed))
+
+class AttackUnit(Unit):
+    def __init__(self,name,hp,speed,damage) : #Python의 생성자
+            Unit.__init__(self,name,hp,speed) #상속받은 클래스
+            self.damage = damage
+
+class Flyable :
+    def __init__(self,flying_speed) :
+        self.flying_speed = flying_speed
+
+    def fly(self,name,location) :
+        print("{0} : {1}".format(name,location)) #self 안 썻음
+
+class FlyableAttackUnit(AttackUnit, Flyable):
+    def __init__(self,name,hp,damage,flying_speed) :
+        AttackUnit.__init__(self,name,hp,0,damage)
+        Flyable.__init__(self,flying_speed)
+
+    def move(self,location) :
+        self.fly(self.name, location)
+
+battlcruiser.move("9시")
+
+
+----pass----
+class BuildeingUnit(Unit):
+    def __init__(self,name,hp,location):
+        pass    #일단 넘어간다
+
+supply_depot = BuildingUnit("서플라이 디팟", 500, "7시")
+
+----슈퍼----
+class BuildeingUnit(Unit):
+    def __init__(self,name,hp,location):
+        super.__init__(name,hp,0)   #Unit.__init__(self,name,hp,0), 다중 상속일 경우에는 첫 번째 부모만 해당
+
+----프로퍼티----
+class Person:
+    def __init__(self):
+        self.__age = 0
+ 
+    @property
+    def age(self):           # getter
+        return self.__age
+ 
+    @age.setter
+    def age(self, value):    # setter
+        self.__age = value
+ 
+james = Person()
+james.age = 20      # 인스턴스.속성 형식으로 접근하여 값 저장
+print(james.age)    # 인스턴스.속성 형식으로 값을 가져옴
+
+----정적메소드----
+class hello:
+    num = 10
+
+    @classmethod
+    def calc(cls, x):
+        return x + 10
+
+print(hello.calc(10))
+
+#인스턴스를 만들지 않아도 메소드 사용이 가능함

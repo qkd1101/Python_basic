@@ -3,60 +3,56 @@
 # for _ in range(test_n) :
 
 def make_pg(k,n,N) :
-    tmp_k = k
+    tmp_k = k-1
     tmp_n = n-1
-    y = []
+    key_k = 0
+    key_n = 0
     for _ in range(3) :
         tmp_n = n-1
+        key_n = 0
         for __ in range(3) :
             if tmp_k < 0 :
+                # print("spot1")
+                pg[key_k][0] = -1
+                pg[key_k][1] = -1
+                pg[key_k][2] = -1
                 break
             if tmp_n < 0:
+                # print("spot2")
+                pg[key_k][key_n] = -1
                 tmp_n += 1
+                key_n += 1
                 continue
             if tmp_n >= N :
+                # print("spot3")
+                pg[key_k][key_n] = -1
                 break
             if(li[tmp_k][tmp_n] == 'o') :
-                if tmp_k == k and tmp_n == n :
-                    tmp_n += 1
+                if tmp_k == k & tmp_n == n :
+                    # print("spot4-1")
                     continue
-                y.append([tmp_k,tmp_n])
+                print("spot4-2",tmp_k,tmp_n,key_k,key_n)
+                pg[key_k][key_n] = 1
                 tmp_n += 1
+                key_n += 1
                 continue
             else :
+                # print("spot5")
+                pg[key_k][key_n] = -1
                 tmp_n += 1
+                key_n += 1
                 continue
         tmp_k += 1
+        key_k += 1
 
-    return y   
-
-def next(k,n,ta,li,coli,N) :
-    global stack
+def next(k,n,N) :
     stack += 1
-    for tik,tin in ta :
-        tmp_k = k - tik
-        tmp_n = n - tin
-        coli[tik][tin] = 1
-        while True :
-            stack += 1
-            if(0 <= tik+tmp_k <= N and 0 <= tin+tmp_n <= N and \
-                li[tik+tmp_k][tin+tmp_n] == 'o') :
-                stack += 1
-                tik += tmp_k
-                tin += tmp_n
-            else :
-                stack = 0
-                return 0
-
-
-
-
+    
 
 N = int(input())
 li = []
 coli = []
 pg = []
-y2 = []
 stack = 0
 
 for _ in range(N) :
@@ -70,11 +66,12 @@ print(li)
 for k in range(N) :
     for n in range(N) :
         if(li[k][n] == 'o') :
-            y2 = make_pg(k,n,N)
-            coli[k][n] = 1
-            next(k,n,y2,li,coli,N)
+            make_pg(k,n,N)
+            li[k][n] = 1
+
             break
     break 
 
-print(stack)
-print(li)
+for a in pg :
+    print(a)
+        

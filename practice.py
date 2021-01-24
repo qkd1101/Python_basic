@@ -1,6 +1,4 @@
-# test_n = int(input())
-
-# for _ in range(test_n) :
+import sys
 
 def make_pg(k,n,N) :
     tmp_k = k
@@ -30,8 +28,7 @@ def make_pg(k,n,N) :
 
     return y   
 
-def next(k,n,ta,li,coli,N) :
-    global stack
+def next(k,n,ta,li,coli,N,stack) :
     stack += 1
     for tik,tin in ta :
         tmp_k = k - tik
@@ -39,42 +36,49 @@ def next(k,n,ta,li,coli,N) :
         coli[tik][tin] = 1
         while True :
             stack += 1
-            if(0 <= tik+tmp_k <= N and 0 <= tin+tmp_n <= N and \
-                li[tik+tmp_k][tin+tmp_n] == 'o') :
+            if(0 <= tik-tmp_k <= N-1 and 0 <= tin-tmp_n <= N-1 and \
+                li[tik-tmp_k][tin-tmp_n] == 'o') :
                 stack += 1
                 tik += tmp_k
                 tin += tmp_n
             else :
                 stack = 0
-                return 0
+                break
+            if stack == 5 :
+                print("YES")
+                sys.exit()
+        if stack != 5 :
+            return -1
 
 
+test_n = int(input())
 
+for _ in range(test_n) :
+    N = int(input())
+    li = []
+    coli = []
+    pg = []
+    y2 = []
+    stack = 0
 
+    for _ in range(N) :
+        a = list(input())
+        li.append(a)
 
-N = int(input())
-li = []
-coli = []
-pg = []
-y2 = []
-stack = 0
+    coli = [[0 for col in range(N)] for row in range(N)]
+    pg = [[0 for col in range(3)] for row in range(3)]
 
-for _ in range(N) :
-    a = list(input())
-    li.append(a)
+    print(li)
+    for k in range(N) :
+        for n in range(N) :
+            if(li[k][n] == 'o') :
+                y2 = make_pg(k,n,N)
+                coli[k][n] = 1
+                check = next(k,n,y2,li,coli,N,stack)
+            
+        break 
 
-coli = [[0 for col in range(N)] for row in range(N)]
-pg = [[0 for col in range(3)] for row in range(3)]
-
-print(li)
-for k in range(N) :
-    for n in range(N) :
-        if(li[k][n] == 'o') :
-            y2 = make_pg(k,n,N)
-            coli[k][n] = 1
-            next(k,n,y2,li,coli,N)
-            break
-    break 
-
+    print("NO")
+print(y2)
 print(stack)
-print(li)
+print(coli)

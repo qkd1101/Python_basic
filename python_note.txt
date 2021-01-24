@@ -52,6 +52,10 @@ python.count("y") : 몇 번 나오는지 카운팅
 print("나는 %d살 입니다." %20)
 print("나는 {}살입니다." .format(20))
 
+context = ("1번째 문장\n
+            2번째 문장\n
+            3번째 문장")
+
 %s
 %c 'a'/"A"
 print("favorite color is %s, %s" %("blue", "beige"))
@@ -87,7 +91,7 @@ subway.count : cnt
 
 subway.sort() : 오름 차순 정렬
 subway.reverse() : 내림 차순 정렬
-
+choice(subway) : 랜덤으로 하나 선택
 subway.clear() : 내용 모두 삭제
 
 subway[-1] : 마지막 요소
@@ -512,9 +516,9 @@ class hello:
     num = 10
 
     @classmethod
-    def calc(cls, x):
-        return x + 10
+    def calc(cls,x):
+        return 10 + x
 
-print(hello.calc(10))
+print(hello.calc(200))
 
 #인스턴스를 만들지 않아도 메소드 사용이 가능함
